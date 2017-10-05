@@ -1,0 +1,7 @@
+--ignore-dir=X86_64/
+--ignore-dir=X86_64_DEBUG/
+--ignore-dir=log/
+--ignore-dir=output/
+--ignore-dir=regression/
+# --pager=less
+--smart-case

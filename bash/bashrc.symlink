@@ -1,0 +1,29 @@
+#! /bin/bash
+
+# Only load Liquid Prompt in interactive shells
+# not from a script or from scp
+[[ $- = *i* ]] && source ~/liquidprompt/liquidprompt
+
+export DOTBASH="$HOME/.dotfiles"
+export exclude_dirs=fds
+
+# define alias, env vars, options, etcs
+config_files=$(find $DOTBASH/ -not -path '*'$exclude_dirs'*' -name '*.bash')
+for file in $config_files
+do
+  source $file
+done
+
+# define functions
+bash_funcs=$(find $DOTBASH/bash_functions/ -type f)
+for file in $bash_funcs
+do
+  source $file
+done
+
+if [[ -e ~/.localrc ]]; then
+  source ~/.localrc
+fi
+
+# show all currently running processes
+#[[ $- = *i* ]] && whom

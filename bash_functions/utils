@@ -1,0 +1,15 @@
+# a list of short utility functions
+
+updatedisplay () {
+  export $(tmux show-environment | grep "^DISPLAY")
+}
+
+clip () {
+  updatedisplay
+  xsel -i "$@"
+}
+
+function vim ()
+{
+  nvim $*
+}

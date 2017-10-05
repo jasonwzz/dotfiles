@@ -1,0 +1,160 @@
+#################################################################
+# Pretty printers:
+
+
+#
+# STL & FDS:
+#
+python
+import sys
+sys.path.insert(0, '/home/fonix/prd_progs/tools/conf/gdb')
+from pretty_printers import register_libstdcxx_printers
+register_libstdcxx_printers (None)              
+from fdsPrettyPrinters import register_fds_printers
+register_fds_printers(None)
+
+
+#################################################################
+# ThreadName printer:
+from fds_thread_name import FDSThreadNameCommand
+
+
+#################################################################
+# FDSA stuff:
+class Fdsa (gdb.Command):
+    def __init__ (self):
+        # should theoretically be COMMAND_USEr
+        # but that doesn't exist with out gdb/python lib
+        super (Fdsa, self).__init__ ("fdsa", gdb.COMMAND_NONE) 
+
+    def invoke (self, arg, from_tty):
+        import os,getpass
+        cmd = 'ps aux | grep -v "grep" | grep %s | grep fdsa_fire_cl_worker | perl -ane "print @F[1]"' % getpass.getuser()
+        pid = os.popen(cmd).read()
+        if pid:
+            print pid
+            gdb.execute('attach ' + pid,True)
+        else:
+            print 'no fdsa proc found for user:', getpass.getuser()
+
+Fdsa()
+
+
+
+class AttachChoose(gdb.Command):
+        def __init__(self):
+                super (AttachChoose, self).__init__ ("AttachChoose", gdb.COMMAND_NONE) 
+
+
+        def invoke(self,arg,from_tty):
+                import os,getpass       
+        
+                cmd = 'ps aux | grep -v "grep" | grep %s | grep fdsa_fire_cl_worker | perl -ane "print @F[1]"' % getpass.getuser()
+                for x,line in enumerate( os.popen(cmd).readlines() ) :
+                        print x,line
+
+
+AttachChoose()
+
+end
+
+
+
+
+
+#################################################################
+define bsave
+    shell rm -f brestore.txt
+    set logging file brestore.txt
+    set logging on
+    info break
+    set logging off
+    # reformat on-the-fly to a valid gdb command file
+    shell perl -ne "print \"break \$1 \n\" if /at\s(.*:\d+)/" brestore.txt > brestore.gdb
+end 
+document bsave
+  store actual breakpoints
+end
+
+define brestore
+  source brestore.gdb
+end
+document brestore
+  restore breakpoints saved by bsave
+end
+# stolen from http://stackoverflow.com/questions/501486/getting-gdb-to-save-a-list-of-breakpoints
+#################################################################
+
+
+#################################################################
+def str
+        call $str=malloc(sizeof(String))
+        call ((String*)$str)->String()
+        call ((String*)$str)->assign($arg0)
+end
+document str
+        makes a string in $str
+end
+
+
+#################################################################
+def mget
+        str $arg1
+        p *(String*)$arg0.px.m_model[ *(String*)$str ].storage_.data_.data_.buf
+        call free($str)
+end
+document mget
+        arg0 = model
+        arg1 = field
+        strings only
+end
+
+#################################################################
+def fdsa1
+        shell ps aux | grep -v "grep" | grep `whoami` | grep fdsa_fire_cl_worker | perl -ane "print @F[1],$/"
+end
+
+#################################################################
+def fdsa_attach2
+python
+import os,getpass
+cmd = 'ps aux | grep -v "grep" | grep %s | grep fdsa_fire_cl_worker | perl -ane "print @F[1]"' % getpass.getuser()
+pid = os.popen(cmd).read()
+if pid:
+        print pid
+        gdb.execute('attach ' + pid,True)
+else:
+        print 'no fdsa proc found for user:', getpass.getuser()
+        
+
+end
+end
+#################################################################
+def fds_gui
+python
+import os,getpass
+cmd = 'ps aux | grep -v "grep" | grep %s | grep fonix_gui_test_harness | perl -ane "print @F[1]"' % getpass.getuser()
+pid = os.popen(cmd).read()
+if pid:
+        print pid
+        gdb.execute('attach ' + pid,True)
+else:
+        print 'no fdsa proc found for user:', getpass.getuser()
+        
+
+end
+end
+#################################################################
+
+def printall
+  set print elements 0
+end
+document printall
+  remove the limit on how many elements get printed.
+end
+
+#################################################################
+
+
+######################### SETTINGS ##############################
+set print pretty on

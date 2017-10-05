@@ -1,0 +1,19 @@
+defscrollback 10000
+
+# quite configurable
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+shell -$SHELL
+vbell off
+
+# prevent screen from using the alternate screen.  this means that terminal
+# output to screen will be added to Putty's scrollback buffer.  better than
+# disabling the alternate screen entirely in putty because other appls like
+# editors might still want to use it legitimately.
+# see:
+# - # http://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter4.html#config-features
+# - # http://serverfault.com/questions/32313/putty-and-screen-and-scroll-back-buffer
+#
+#termcapinfo xterm ti@:te@
+termcapinfo xterm* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'']]]]]]'
+term xterm
+

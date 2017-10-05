@@ -1,0 +1,32 @@
+# functions for taking notes
+
+ncat() {
+  if [ ! "$1" = "" ]; then
+    cat $NOTE_PATH/"$1".txt
+  else
+    cat $NOTE_PATH/note.txt
+  fi
+}
+
+n() {
+  if [ ! -d "$NOTE_PATH" ]; then
+    mkdir -p $NOTE_PATH
+  fi
+  if [ ! "$1" = "" ]; then
+    $EDITOR $NOTE_PATH/"$1".txt
+  else
+    $EDITOR $NOTE_PATH/note.txt
+  fi
+}
+
+nls() {
+  ls -1 $NOTE_PATH | sed 's/.txt//g'
+}
+
+nless() {
+  if [ ! "$1" = "" ]; then
+    less $NOTE_PATH/"$1".txt
+  else
+    less $NOTE_PATH/note.txt
+  fi
+}
