@@ -12,3 +12,5 @@ atom.symlink/recovery
 git/gitconfig.local.symlink
 
 fds/
+
+vim/fds.vim
