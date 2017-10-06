@@ -9,216 +9,219 @@ endif
 
 if has('nvim')
 
-" Required:
-set runtimepath+=/home/user/zwang/.local/share/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('/home/user/zwang/.local/share/dein')
-  call dein#begin('/home/user/zwang/.local/share/dein')
-
-  " Let dein manage dein
   " Required:
-  call dein#add('/home/user/zwang/.local/share/dein/repos/github.com/Shougo/dein.vim')
+  exe "set runtimepath+=".$HOME."/.local/share/dein/repos/github.com/Shougo/dein.vim"
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+  exe "let deinloaded=dein#load_state('".$HOME."/.local/share/dein')"
+  " Required:
+  " dein#load_state(.$HOME.'/.local/share/dein')
+  if deinloaded
+    exe "call dein#begin('".$HOME."/.local/share/dein')"
 
-  call dein#add('flazz/vim-colorschemes')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('vim-scripts/taglist.vim')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('christoomey/vim-tmux-navigator')
-  call dein#add('fntlnz/atags.vim')
-  call dein#add('vim-scripts/Mark--Karkat')
-""  call dein#add('neomake/neomake')
-" one recent change makes clang-tidy not able to pick local compilation
-" database. so using a forked version fixing that issue now
-  call dein#add('jasonwzz/neomake')
-  call dein#add('vim-scripts/a.vim')
-  call dein#add('kien/ctrlp.vim')
-  call dein#add('jeetsukumaran/vim-buffergator')
-  call dein#add('easymotion/vim-easymotion')
-  call dein#add('matze/vim-move')
-  call dein#add('vim-scripts/c.vim')
-  call dein#add('maxbrunsfeld/vim-yankstack')
-  call dein#add('octol/vim-cpp-enhanced-highlight')
-  call dein#add('godlygeek/tabular')
-  call dein#add('tmux-plugins/vim-tmux-focus-events')
-  call dein#add('https://github.factset.com/zwang/deoplete-clang2')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('mhinz/vim-signify')
-  call dein#add('mhinz/vim-startify')
-  call dein#add('moll/vim-bbye')
-""  call dein#add('arakashic/chromatica.nvim')
-""  call dein#add('zchee/deoplete-clang')
-" call dein#add('tweekmonster/deoplete-clang2')
-"Plugin 'tweekmonster/deoplete-clang2'
-"Plugin 'zchee/deoplete-jedi'
-"Plugin 'majutsushi/tagbar'
-"Plugin 'LucHermitte/lh-vim-lib'
-"Plugin 'LucHermitte/lh-tags'
-"Plugin 'LucHermitte/lh-dev'
-"Plugin 'LucHermitte/lh-brackets'
-"Plugin 'LucHermitte/vim-refactor'
+    " Let dein manage dein
+    " Required:
+    exe "call dein#add('".$HOME."/.local/share/dein/repos/github.com/Shougo/dein.vim')"
 
-  " You can specify revision/branch/tag.
-  ""call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+    " Add or remove your plugins here:
+    call dein#add('Shougo/neosnippet.vim')
+    call dein#add('Shougo/neosnippet-snippets')
+
+    call dein#add('flazz/vim-colorschemes')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/denite.nvim')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
+    call dein#add('vim-scripts/taglist.vim')
+    call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-repeat')
+    call dein#add('christoomey/vim-tmux-navigator')
+    call dein#add('fntlnz/atags.vim')
+    call dein#add('vim-scripts/Mark--Karkat')
+    ""  call dein#add('neomake/neomake')
+    " one recent change makes clang-tidy not able to pick local compilation
+    " database. so using a forked version fixing that issue now
+    call dein#add('jasonwzz/neomake')
+    call dein#add('vim-scripts/a.vim')
+    call dein#add('kien/ctrlp.vim')
+    call dein#add('jeetsukumaran/vim-buffergator')
+    call dein#add('easymotion/vim-easymotion')
+    call dein#add('matze/vim-move')
+    call dein#add('vim-scripts/c.vim')
+    call dein#add('maxbrunsfeld/vim-yankstack')
+    call dein#add('octol/vim-cpp-enhanced-highlight')
+    call dein#add('godlygeek/tabular')
+    call dein#add('tmux-plugins/vim-tmux-focus-events')
+    " call dein#add('https://github.factset.com/zwang/deoplete-clang2')
+    call dein#add('tpope/vim-fugitive')
+    call dein#add('mhinz/vim-signify')
+    call dein#add('mhinz/vim-startify')
+    call dein#add('moll/vim-bbye')
+    ""  call dein#add('arakashic/chromatica.nvim')
+    ""  call dein#add('zchee/deoplete-clang')
+    " call dein#add('tweekmonster/deoplete-clang2')
+    "Plugin 'tweekmonster/deoplete-clang2'
+    "Plugin 'zchee/deoplete-jedi'
+    "Plugin 'majutsushi/tagbar'
+    "Plugin 'LucHermitte/lh-vim-lib'
+    "Plugin 'LucHermitte/lh-tags'
+    "Plugin 'LucHermitte/lh-dev'
+    "Plugin 'LucHermitte/lh-brackets'
+    "Plugin 'LucHermitte/vim-refactor'
+
+    " You can specify revision/branch/tag.
+    ""call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  endif
+
+  ""exe "let deinloaded=dein#load_state('".$HOME."/.local/share/dein')"
+  ""if deinloaded
+  ""  exe "call dein#begin('".$HOME."/.local/share/dein')"
+  ""  call dein#add('moll/vim-bbye')
+  ""  call dein#end()
+  ""  call dein#save_state()
+  ""endif
 
   " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""    Plugin Configuration     """"""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Map the leader key to SPACE
-let mapleader="\<SPACE>"
-
-" CtrlP settings
-let g:ctrlp_root_markers = ['.rakefds', '.p4rc','.git']
-" Alt-P to open CtrlP -- find files in the directory to open
-let g:ctrlp_map = '<A-p>'
-nmap <A-p> :CtrlP<CR>
-" Alt-Shift-P to switch to opened buffers
-nmap <A-S-p> :CtrlPBuffer<CR>
-" when opening multiple files, open them in hidden buffer
-let g:ctrlp_open_multiple_files = 'i'
+  filetype plugin indent on
+  syntax enable
 
 
-" airline setting
-let g:airline_theme='bubblegum'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 0
-""if isdirectory("./.git")
-""  let g:airline#extensions#branch#enabled = 1
-""  let g:airline#init#vim_async = 1
-""else
-""endif
+  "End dein Scripts-------------------------
 
-" don't remember what this is..
-let g:buffergator_suppress_keymaps=1
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """"""""""""""""""""""""""""""    Plugin Configuration     """"""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" cpp highlighting stuff
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_experimental_template_highlight = 1
+  " Map the leader key to SPACE
+  let mapleader="\<SPACE>"
 
-" cycle through previous/next yanked item when pasting
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
-let g:yankstack_map_keys = 0
-let g:yankstack_yank_keys = ['y', 'd', 'x', 'yy', 'D', 'dd']
+  " CtrlP settings
+  let g:ctrlp_root_markers = ['.rakefds', '.p4rc','.git']
+  " Alt-P to open CtrlP -- find files in the directory to open
+  let g:ctrlp_map = '<A-p>'
+  nmap <A-p> :CtrlP<CR>
+  " Alt-Shift-P to switch to opened buffers
+  nmap <A-S-p> :CtrlPBuffer<CR>
+  " when opening multiple files, open them in hidden buffer
+  let g:ctrlp_open_multiple_files = 'i'
 
-" neomake setting
-" enable clang-tidy as the cpp linter
-let g:neomake_cpp_enabled_makers = ['clangtidy']
-" On each save, run neomake, which will run clang-tidy
-autocmd! BufWritePost * Neomake
 
-" chromatica is not used. 
-" I can't getting it working for large files
-" it stops highlighting after few hundreds of lines
-" let g:chromatica#highlight_feature_level = 1
-" let g:chromatica#enable_at_startup=0
-" let g:chromatica#debug_log = 1
-" let g:chromatica#libclang_path='/home/user/zwang/local/clang/trunk/lib/libclang.so'
-" can't get deoplete-clang working either
-""let g:deoplete#sources#clang#libclang_path = '/home/user/zwang/local/clang/trunk/lib/libclang.so'
-""let g:deoplete#sources#clang#clang_complete_database = './'
+  " airline setting
+  let g:airline_theme='bubblegum'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#branch#enabled = 0
+  ""if isdirectory("./.git")
+  ""  let g:airline#extensions#branch#enabled = 1
+  ""  let g:airline#init#vim_async = 1
+  ""else
+  ""endif
 
-" deoplete setting
-let g:deoplete#auto_complete_delay = 10
-" use shift tab to backward cycle
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-" automatically closing the scratch window at the top of the vim window on finishing a complete or leaving insert
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" don't open scratch window for preview
-set completeopt-=preview
+  " don't remember what this is..
+  let g:buffergator_suppress_keymaps=1
 
-" deoplete-clang2 settings
-let g:deoplete#sources#clang#executable = '/home/user/zwang/local/clang/trunk/bin/clang'
-let g:deoplete#sources#clang#flags = ['-I/home/dev/fonix/online/qa/src/X86_64/el6/include','-I/home/dev/fonix/online/qa/src','-I.','-IX86_64/el6/include','-isystem/home/fds/build/include/thrift','-isystem/home/fds/build/include','-isystem/usr/include/freetype2','-isystem/usr/include/libxml2','-I/usr/include','-I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4/x86_64-redhat-linux','-D_GLIBCXX_VISIBILITY=0','-DCRYPTOPP_ENABLE_NAMESPACE_WEAK','-DFDS_USE_SYSTEM_CRYPTOPP','-DFDS_USE_SYSTEM_XERCES','-DFDS_USE_SYSTEM_ZEROMQ','-D__USE_STD_IOSTREAM','-DFONIX_WRAPPING_CXA_THROW','-DFDS_TOOLKIT','-DSINGLE_USER_ONLINE_ONLY','-DFDS_ANSI64','-DFDS_FORTRAN_64','-DFDS_ONLINE','-DFDS_USE_BOOST_1_34','-DNDEBUG','-D_GNU_SOURCE','-D__IEEE_FLOAT','-D__NEW_STARLET','-DFDS_EXPORT_ENABLED', '-include', '/home/dev/fonix/online/qa/src/first_include.h', '-fexceptions']
-" if a completed function takes arguments, use <C-k> <C-M-k> to jump back and forth to fill the arguments
-" apparently vim doesn't differentiate C-k vs C-K/C-S-k so can use that.
-let g:clang2_placeholder_prev = '<C-M-k>'
-""let g:clang2_placeholder_prev = '<C-S-i>'
-let g:clang2_placeholder_next = '<C-k>'
+  " cpp highlighting stuff
+  let g:cpp_class_scope_highlight = 1
+  let g:cpp_member_variable_highlight = 1
+  let g:cpp_experimental_template_highlight = 1
 
-" generate ctags on save
-autocmd BufWritePost *.{cpp,cxx,h} call atags#generate()
-let g:atags_build_commands_list = [
-      \"ctags * tags",
-      \"ack -f -n --cpp > cscope.files",
-      \"cscope -icscope.files -b "]
+  " cycle through previous/next yanked item when pasting
+  nmap <C-p> <Plug>yankstack_substitute_older_paste
+  nmap <C-n> <Plug>yankstack_substitute_newer_paste
+  let g:yankstack_map_keys = 0
+  let g:yankstack_yank_keys = ['y', 'd', 'x', 'yy', 'D', 'dd']
 
-" tagbar setting 
-" not used anymore
-" it sometimes crashes vim. haven't looked into why
-"nmap <F8> :TagbarToggle<CR>
+  " neomake setting
+  " enable clang-tidy as the cpp linter
+  let g:neomake_cpp_enabled_makers = ['clangtidy']
+  " On each save, run neomake, which will run clang-tidy
+  autocmd! BufWritePost * Neomake
 
-" using taglist now
-" taglist shortcut & settings
-nmap <F7> :TlistToggle<CR>
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
+  " chromatica is not used. 
+  " I can't getting it working for large files
+  " it stops highlighting after few hundreds of lines
+  " let g:chromatica#highlight_feature_level = 1
+  " let g:chromatica#enable_at_startup=0
+  " let g:chromatica#debug_log = 1
+  " let g:chromatica#libclang_path='$HOME/local/clang/trunk/lib/libclang.so'
+  " can't get deoplete-clang working either
+  ""let g:deoplete#sources#clang#libclang_path = '$HOME/local/clang/trunk/lib/libclang.so'
+  ""let g:deoplete#sources#clang#clang_complete_database = './'
 
-" NeoSnippet Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-inoremap <C-k>     <Plug>(neosnippet_expand_or_jump)
-snoremap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xnoremap <C-k>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-""imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  " deoplete setting
+  let g:deoplete#auto_complete_delay = 10
+  " use shift tab to backward cycle
+  inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+  " automatically closing the scratch window at the top of the vim window on finishing a complete or leaving insert
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+  " don't open scratch window for preview
+  set completeopt-=preview
 
-" vim nagivator
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <m-a> :TmuxNavigateLeft<cr>
-nnoremap <silent> <m-s> :TmuxNavigateDown<cr>
-nnoremap <silent> <m-w> :TmuxNavigateUp<cr>
-nnoremap <silent> <m-d> :TmuxNavigateRight<cr>
-nnoremap <silent> <m-\> :TmuxNavigatePrevious<cr>
+  " deoplete-clang2 settings
+  exe "let g:deoplete#sources#clang#executable = '".$HOME."/local/clang/trunk/bin/clang'"
+  let g:deoplete#sources#clang#flags = ['-I/home/dev/fonix/online/qa/src/X86_64/el6/include','-I/home/dev/fonix/online/qa/src','-I.','-IX86_64/el6/include','-isystem/home/fds/build/include/thrift','-isystem/home/fds/build/include','-isystem/usr/include/freetype2','-isystem/usr/include/libxml2','-I/usr/include','-I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4/x86_64-redhat-linux','-D_GLIBCXX_VISIBILITY=0','-DCRYPTOPP_ENABLE_NAMESPACE_WEAK','-DFDS_USE_SYSTEM_CRYPTOPP','-DFDS_USE_SYSTEM_XERCES','-DFDS_USE_SYSTEM_ZEROMQ','-D__USE_STD_IOSTREAM','-DFONIX_WRAPPING_CXA_THROW','-DFDS_TOOLKIT','-DSINGLE_USER_ONLINE_ONLY','-DFDS_ANSI64','-DFDS_FORTRAN_64','-DFDS_ONLINE','-DFDS_USE_BOOST_1_34','-DNDEBUG','-D_GNU_SOURCE','-D__IEEE_FLOAT','-D__NEW_STARLET','-DFDS_EXPORT_ENABLED', '-include', '/home/dev/fonix/online/qa/src/first_include.h', '-fexceptions']
+  " if a completed function takes arguments, use <C-k> <C-M-k> to jump back and forth to fill the arguments
+  " apparently vim doesn't differentiate C-k vs C-K/C-S-k so can use that.
+  let g:clang2_placeholder_prev = '<C-M-k>'
+  ""let g:clang2_placeholder_prev = '<C-S-i>'
+  let g:clang2_placeholder_next = '<C-k>'
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+  " generate ctags on save
+  autocmd BufWritePost *.{cpp,cxx,h} call atags#generate()
+  let g:atags_build_commands_list = [
+        \"ctags * tags",
+        \"ack -f -n --cpp > cscope.files",
+        \"cscope -icscope.files -b "]
 
-if has("python3")
-  call deoplete#enable()
-  " deoplete tab complete
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#mappings#manual_complete()
-  function! s:check_back_space() "{{{
+  " tagbar setting 
+  " not used anymore
+  " it sometimes crashes vim. haven't looked into why
+  "nmap <F8> :TagbarToggle<CR>
+
+  " using taglist now
+  " taglist shortcut & settings
+  nmap <F7> :TlistToggle<CR>
+  let Tlist_Use_Right_Window = 1
+  let Tlist_WinWidth = 40
+
+  " NeoSnippet Plugin key-mappings.
+  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+  inoremap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  snoremap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xnoremap <C-k>     <Plug>(neosnippet_expand_target)
+  " SuperTab like snippets behavior.
+  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+  ""imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  "imap <expr><TAB>
+  " \ pumvisible() ? "\<C-n>" :
+  " \ neosnippet#expandable_or_jumpable() ?
+  " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+  " vim nagivator
+  let g:tmux_navigator_no_mappings = 1
+  nnoremap <silent> <m-a> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <m-s> :TmuxNavigateDown<cr>
+  nnoremap <silent> <m-w> :TmuxNavigateUp<cr>
+  nnoremap <silent> <m-d> :TmuxNavigateRight<cr>
+  nnoremap <silent> <m-\> :TmuxNavigatePrevious<cr>
+
+  " For conceal markers.
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+
+  if has("python3")
+    call deoplete#enable()
+    " deoplete tab complete
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ deoplete#mappings#manual_complete()
+    function! s:check_back_space() "{{{
       let col = col('.') - 1
       return !col || getline('.')[col - 1] =~ '\s'
-  endfunction "}}}
-endif
+    endfunction "}}}
+  endif
 
 endif " end of if has nvim
 
@@ -231,43 +234,43 @@ if has('nvim')
 endif
 
 set ruler                       " Show the line and column number
-                                " of the cursor position
+" of the cursor position
 set number                      " Print the line number in front of each line
 set list                        " Show tabs
 set listchars=tab:>-
 set showmatch                   " When a bracket is inserted,
-                                " briefly jump to the matching one
+" briefly jump to the matching one
 "set noswf                       " Do not use a swapfile for the buffer
 
 set path=.,$qa,$vms_include,,   " This is a list of directories
-                                 " which will be searched
-                                 " e.g. you could use ":find pa_options_factset.json" 
-                                 " to open $qa/pa_options_factset.json
+" which will be searched
+" e.g. you could use ":find pa_options_factset.json" 
+" to open $qa/pa_options_factset.json
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/X86_64/*,*/X86_64*/*,*/regression/*,*/log/*,*/output/*,*/.padevenv/*
-                                " ignore these directories when searching
+" ignore these directories when searching
 set matchpairs=(:),{:},[:],<:>  " Characters that form pairs
 set backspace=2                 " :set backspace=indent,eol,start
 set tabstop=2                   " Number of spaces that a <Tab> in the file
-                                " counts for
+" counts for
 set softtabstop=2               " Number of spaces that a <Tab> counts for
-                                " while performing editing operations
+" while performing editing operations
 set smarttab                    " A <Tab> in front of a line inserts
-                                " blanks according to 'shiftwidth'
+" blanks according to 'shiftwidth'
 set expandtab                   " Use the appropriate number of spaces
-                                " to insert a <Tab>
+" to insert a <Tab>
 set autoindent                  " Copy indent from current line
-                                " when starting a new lineauto indent
+" when starting a new lineauto indent
 set shiftwidth=2                " Number of spaces to use for each step
-                                " of (auto)indent
+" of (auto)indent
 set smartindent                 " Do smart autoindenting
-                                " when starting a new line
+" when starting a new line
 
 set hlsearch                    " When there is a previous search pattern,
-                                " highlight all its matches
+" highlight all its matches
 set ignorecase                  " Ignore case in search patterns
 set smartcase                   " Override the 'ignorecase' option
-                                " if the search pattern contains
-                                " upper case characters
+" if the search pattern contains
+" upper case characters
 set encoding=utf-8              " UTF-8 character encoding
 syntax on
 
@@ -306,11 +309,11 @@ autocmd Syntax html,vim inoremap < <lt>><Left>
 ""autocmd Syntax cpp inoremap < <><Left>
 
 function! ClosePair(char)
-if getline('.')[col('.') - 1] == a:char
-return "\<Right>"
-else
-return a:char
-endif
+  if getline('.')[col('.') - 1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
 endf
 
 inoremap ) <c-r>=ClosePair(')')<CR>
@@ -320,18 +323,18 @@ inoremap > <c-r>=ClosePair('>')<CR>
 
 " Auto Close Quotes (function allows for escaping auto quotes).
 function! QuoteDelim(char)
-    let line = getline('.')
-    let col = col('.')
-    if line[col - 2] == "\\"
-        "Inserting a quoted quotation mark into the string
-        return a:char
-    elseif line[col - 1] == a:char
-        "Escaping out of the string
-        return "\<Right>"
-    else
-        "Starting a string
-        return a:char.a:char."\<Left>"
-    endif
+  let line = getline('.')
+  let col = col('.')
+  if line[col - 2] == "\\"
+    "Inserting a quoted quotation mark into the string
+    return a:char
+  elseif line[col - 1] == a:char
+    "Escaping out of the string
+    return "\<Right>"
+  else
+    "Starting a string
+    return a:char.a:char."\<Left>"
+  endif
 endf
 
 inoremap " <c-r>=QuoteDelim('"')<CR>
@@ -339,21 +342,21 @@ inoremap ' <c-r>=QuoteDelim("'")<CR>
 
 " Delete empty pairs
 function! InAnEmptyPair()
-let cur = strpart(getline('.'),getpos('.')[2]-2,2)
-for pair in (split(&matchpairs,',') + ['":"',"':'"])
-if cur == join(split(pair,':'),'')
-return 1
-endif
-endfor
-return 0
+  let cur = strpart(getline('.'),getpos('.')[2]-2,2)
+  for pair in (split(&matchpairs,',') + ['":"',"':'"])
+    if cur == join(split(pair,':'),'')
+      return 1
+    endif
+  endfor
+  return 0
 endfunc
 
 func! DeleteEmptyPairs()
-if InAnEmptyPair()
-return "\<Left>\<Del>\<Del>"
-else
-return "\<BS>"
-endif
+  if InAnEmptyPair()
+    return "\<Left>\<Del>\<Del>"
+  else
+    return "\<BS>"
+  endif
 endfunc
 
 inoremap <expr> <BS> DeleteEmptyPairs()
@@ -399,7 +402,7 @@ set formatoptions=tcqr
 set autoread
 autocmd CursorHold,CursorHoldI,FocusGained,BufEnter * checktime
 autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+      \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " By default, <c-l> clears and redraws the screen (like :redraw!). The
 " following mapping does the same, plus de-highlighting the matches found via
@@ -431,8 +434,8 @@ function! EnhanceCppSyntax()
   hi default Member ctermfg=LightBlue guifg=LightBlue 
   syn match cppClassMemVariable "m_\w\+"
   hi def link cppClassMemVariable Member
-""  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
-""  hi def link cppFuncDef Special
+  ""  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
+  ""  hi def link cppFuncDef Special
 endfunction
 
 autocmd Syntax cpp call EnhanceCppSyntax()
@@ -468,7 +471,7 @@ set nobackup
 set nowb
 set noswapfile
 set undofile
-set undodir     =$HOME/.vim/files/undo/
+exe "set undodir='".$HOME."/.vim/files/undo/'"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""       General   Hotkeys        """"""""""""""""""""""""""""""""""
@@ -517,13 +520,13 @@ map! <S-Insert> <MiddleMouse>
 " Courtesy of Michael Naumann, Jürgen Krämer
 " Visually select text, then search for it, forwards or backwards
 vmap <silent> * :<C-U>let old_reg=@"<cr>
-                  \gvy/<C-R><C-R>=substitute(
-                  \escape(@", '\\/.*$^~[]'), "\n$", "", "")<CR><CR>
-                  \:let @"=old_reg<cr>
+      \gvy/<C-R><C-R>=substitute(
+      \escape(@", '\\/.*$^~[]'), "\n$", "", "")<CR><CR>
+      \:let @"=old_reg<cr>
 vmap <silent> # :<C-U>let old_reg=@"<cr>
-                  \gvy?<C-R><C-R>=substitute(
-                  \escape(@", '\\/.*$^~[]'), "\n$", "", "")<CR><CR>
-                  \:let @"=old_reg<cr>
+      \gvy?<C-R><C-R>=substitute(
+      \escape(@", '\\/.*$^~[]'), "\n$", "", "")<CR><CR>
+      \:let @"=old_reg<cr>
 
 " notes
 " gg=G to correct indentation for the whole file
@@ -564,13 +567,13 @@ nnoremap <leader>p :e #<CR>
 
 " Perf edit current file (control pe)
 function! P4Edit()
-    if has("vms")
-        return '!perf edit %'
-    elseif has("unix")
-        return '!p4 edit %'
-    else
-        return ''
-    endif
+  if has("vms")
+    return '!perf edit %'
+  elseif has("unix")
+    return '!p4 edit %'
+  else
+    return ''
+  endif
 endfunc
 
 function! P4Checkout()
@@ -628,8 +631,8 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
 
-" To map <Esc> to exit terminal-mode
-tnoremap <Esc> <C-\><C-n>
+  " To map <Esc> to exit terminal-mode
+  tnoremap <Esc> <C-\><C-n>
 
 endif
 
@@ -773,3 +776,23 @@ if has("cscope")
   "set ttimeoutlen=100
 
 endif
+
+" load additional vim settings
+let DOTPATH = $HOME."/.dotfiles"
+let config_files = split(globpath(DOTPATH, '**/*.vim'), '\n')
+for file in config_files
+  exe "source ".file
+endfor
+
+if has('nvim')
+  if deinloaded
+    " Required:
+    call dein#end()
+    call dein#save_state()
+  endif
+
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
+endif 
