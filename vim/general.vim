@@ -32,4 +32,4 @@ set nobackup
 set nowb
 set noswapfile
 set undofile
-exe "set undodir='".$HOME."/.vim/files/undo/'"
+exe "set undodir=".$HOME."/.vim/files/undo/"
