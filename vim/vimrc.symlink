@@ -96,7 +96,7 @@ if has('nvim')
   let mapleader="\<SPACE>"
 
   " CtrlP settings
-  let g:ctrlp_root_markers = ['.rakefds', '.p4rc','.git']
+  let g:ctrlp_root_markers = ['.git']
   " Alt-P to open CtrlP -- find files in the directory to open
   let g:ctrlp_map = '<A-p>'
   nmap <A-p> :CtrlP<CR>
@@ -157,8 +157,8 @@ if has('nvim')
   set completeopt-=preview
 
   " deoplete-clang2 settings
-  exe "let g:deoplete#sources#clang#executable = '".$HOME."/local/clang/trunk/bin/clang'"
-  let g:deoplete#sources#clang#flags = ['-I/home/dev/fonix/online/qa/src/X86_64/el6/include','-I/home/dev/fonix/online/qa/src','-I.','-IX86_64/el6/include','-isystem/home/fds/build/include/thrift','-isystem/home/fds/build/include','-isystem/usr/include/freetype2','-isystem/usr/include/libxml2','-I/usr/include','-I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4/x86_64-redhat-linux','-D_GLIBCXX_VISIBILITY=0','-DCRYPTOPP_ENABLE_NAMESPACE_WEAK','-DFDS_USE_SYSTEM_CRYPTOPP','-DFDS_USE_SYSTEM_XERCES','-DFDS_USE_SYSTEM_ZEROMQ','-D__USE_STD_IOSTREAM','-DFONIX_WRAPPING_CXA_THROW','-DFDS_TOOLKIT','-DSINGLE_USER_ONLINE_ONLY','-DFDS_ANSI64','-DFDS_FORTRAN_64','-DFDS_ONLINE','-DFDS_USE_BOOST_1_34','-DNDEBUG','-D_GNU_SOURCE','-D__IEEE_FLOAT','-D__NEW_STARLET','-DFDS_EXPORT_ENABLED', '-include', '/home/dev/fonix/online/qa/src/first_include.h', '-fexceptions']
+  ""exe "let g:deoplete#sources#clang#executable = '".$HOME."/local/clang/trunk/bin/clang'"
+  ""let g:deoplete#sources#clang#flags = ['-I/home/dev/fonix/online/qa/src/X86_64/el6/include','-I/home/dev/fonix/online/qa/src','-I.','-IX86_64/el6/include','-isystem/home/fds/build/include/thrift','-isystem/home/fds/build/include','-isystem/usr/include/freetype2','-isystem/usr/include/libxml2','-I/usr/include','-I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4','-I/export/fds/Linux_RHEL6_x86_64/build/include/c++/4.4.4/x86_64-redhat-linux','-D_GLIBCXX_VISIBILITY=0','-DCRYPTOPP_ENABLE_NAMESPACE_WEAK','-DFDS_USE_SYSTEM_CRYPTOPP','-DFDS_USE_SYSTEM_XERCES','-DFDS_USE_SYSTEM_ZEROMQ','-D__USE_STD_IOSTREAM','-DFONIX_WRAPPING_CXA_THROW','-DFDS_TOOLKIT','-DSINGLE_USER_ONLINE_ONLY','-DFDS_ANSI64','-DFDS_FORTRAN_64','-DFDS_ONLINE','-DFDS_USE_BOOST_1_34','-DNDEBUG','-D_GNU_SOURCE','-D__IEEE_FLOAT','-D__NEW_STARLET','-DFDS_EXPORT_ENABLED', '-include', '/home/dev/fonix/online/qa/src/first_include.h', '-fexceptions']
   " if a completed function takes arguments, use <C-k> <C-M-k> to jump back and forth to fill the arguments
   " apparently vim doesn't differentiate C-k vs C-K/C-S-k so can use that.
   let g:clang2_placeholder_prev = '<C-M-k>'
@@ -242,11 +242,11 @@ set showmatch                   " When a bracket is inserted,
 " briefly jump to the matching one
 "set noswf                       " Do not use a swapfile for the buffer
 
-set path=.,$qa,$vms_include,,   " This is a list of directories
+set path=.,,   " This is a list of directories
 " which will be searched
 " e.g. you could use ":find pa_options_factset.json" 
 " to open $qa/pa_options_factset.json
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/X86_64/*,*/X86_64*/*,*/regression/*,*/log/*,*/output/*,*/.padevenv/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/X86_64/*,*/X86_64*/*,*/regression/*,*/log/*,*/output/*
 " ignore these directories when searching
 set matchpairs=(:),{:},[:],<:>  " Characters that form pairs
 set backspace=2                 " :set backspace=indent,eol,start
@@ -412,68 +412,6 @@ autocmd FileChangedShellPost *
 nnoremap <M-l> :nohlsearch<cr>:MarkClear<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""        C/C++ specific       """"""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" some smart indent for C
-set cindent
-
-"	The 'cinoptions' affect the way 'cindent' reindents lines in a C program.
-set cinoptions=:0,p0,t0
-
-set cinwords=if,else,while,do,for,switch,case
-
-" Show $ at end of line and trailing space as ~
-" set lcs=tab:\ \ ,eol:$,trail:,extends:>,precedes:<
-
-syn region myFold start="{" end="}" transparent fold
-syn sync fromstart
-
-" Add highlighting for function definition in C++
-function! EnhanceCppSyntax()
-  " class member variable syntax highlighting based on FDS convention
-  hi default Member ctermfg=LightBlue guifg=LightBlue 
-  syn match cppClassMemVariable "m_\w\+"
-  hi def link cppClassMemVariable Member
-  ""  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
-  ""  hi def link cppFuncDef Special
-endfunction
-
-autocmd Syntax cpp call EnhanceCppSyntax()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""     Tabs and scrolling      """"""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Use the appropriate number of spaces to insert a	<Tab>.
-set expandtab
-
-"<Tab> does what you think it should do according to the situation
-set smarttab
-
-"Copy indent from current line when starting a new line
-set autoindent
-
-"Smart indent
-set smartindent
-
-"don't wrap up the long lines
-set nowrap
-
-"move 5 chars at the time
-set sidescroll=5
-
-" Tabs are 2 spaces
-set ts=2
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""       Files, backups and undo     """""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-set undofile
-exe "set undodir='".$HOME."/.vim/files/undo/'"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""       General   Hotkeys        """"""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "control-Tab to switch between tabs
@@ -538,94 +476,6 @@ nmap <leader>oo :lop<CR>
 nmap <leader>oc :lcl<CR>
 
 
-"""""""""""""""""""""""""       Buffer  Hotkeys        """""""""""""""""""""""""""""""""
-
-" buffer switching shortcuts
-" This allows buffers to be hidden if you've modified a buffer.
-" This is almost a must if you wish to use buffers in this way.
-set hidden
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nnoremap <leader>T :enew<cr>
-" Move to the next buffer
-nnoremap <leader>l :bnext<CR>
-" Move to the previous buffer
-nnoremap <leader>h :bprevious<CR>
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nnoremap <leader>bq :bp <BAR> bd #<CR>
-" Show all open buffers and their status
-nnoremap <leader>bl :ls<CR>
-nnoremap <leader>d :Bdelete<CR>
-
-" switch to previous buffer
-nnoremap <leader>p :e #<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""       Perforce   Hotkeys        """""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Perf edit current file (control pe)
-function! P4Edit()
-  if has("vms")
-    return '!perf edit %'
-  elseif has("unix")
-    return '!p4 edit %'
-  else
-    return ''
-  endif
-endfunc
-
-function! P4Checkout()
-  if has("vms")
-    echo "vms not supported"
-  elseif has("unix")
-    :exec "!p4view \/m" expand('%:t')
-    :exec "!p4 sync" expand('%:t') "@online_qa"
-    :exec "!p4 edit" expand('%:t') 
-    :e %:t
-  endif
-endfunc
-
-function! OpenQA()
-  if has("vms")
-    echo "vms not supported"
-  elseif has("unix")
-    :tabe $qa/%:t
-  endif
-endfunc
-
-nmap <Leader>fe :exec P4Edit()<CR>
-nmap <Leader>fo :exec P4Checkout()<CR>
-nmap <Leader>qa :exec OpenQA()<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""        Window Management        """""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" toggle between maximized window and normal window
-" useful in split windows and you want to temporarily focus on one window
-nnoremap <C-W>O :call MaximizeToggle()<CR>
-nnoremap <C-W>o :call MaximizeToggle()<CR>
-nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
-
-function! MaximizeToggle()
-  if exists("s:maximize_session")
-    exec "source " . s:maximize_session
-    call delete(s:maximize_session)
-    unlet s:maximize_session
-    let &hidden=s:maximize_hidden_save
-    unlet s:maximize_hidden_save
-  else
-    let s:maximize_hidden_save = &hidden
-    let s:maximize_session = tempname()
-    set hidden
-    exec "mksession! " . s:maximize_session
-    only
-  endif
-endfunction
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""          Neovim Terminal        """""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -636,146 +486,10 @@ if has('nvim')
 
 endif
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""          Cscope Hotkeys         """""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""        Load .VIM SCRIPTS        """""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("cscope")
-
-  """"""""""""" Standard cscope/vim boilerplate
-
-  " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-  set cscopetag
-
-  " check cscope for definition of a symbol before checking ctags: set to 1
-  " if you want the reverse search order.
-  set csto=0
-
-  set csprg=/usr/bin/cscope
-
-  " add any cscope database in current directory
-  if filereadable("cscope.out")
-    cs add cscope.out  
-    " else add the database pointed to by environment variable 
-  elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-  endif
-
-  " show msg when any other cscope db added
-  set cscopeverbose  
-
-
-  """"""""""""" My cscope/vim key mappings
-  "
-  " The following maps all invoke one of the following cscope search types:
-  "
-  "   's'   symbol: find all references to the token under cursor
-  "   'g'   global: find global definition(s) of the token under cursor
-  "   'c'   calls:  find all calls to the function name under cursor
-  "   't'   text:   find all instances of the text under cursor
-  "   'e'   egrep:  egrep search for the word under cursor
-  "   'f'   file:   open the filename under cursor
-  "   'i'   includes: find files that include the filename under cursor
-  "   'd'   called: find functions that function under cursor calls
-  "
-  " Below are three sets of the maps: one set that just jumps to your
-  " search result, one that splits the existing vim window horizontally and
-  " diplays your search result in the new window, and one that does the same
-  " thing, but does a vertical split instead (vim 6 only).
-  "
-  " I've used CTRL-\ and CTRL-@ as the starting keys for these maps, as it's
-  " unlikely that you need their default mappings (CTRL-\'s default use is
-  " as part of CTRL-\ CTRL-N typemap, which basically just does the same
-  " thing as hitting 'escape': CTRL-@ doesn't seem to have any default use).
-  " If you don't like using 'CTRL-@' or CTRL-\, , you can change some or all
-  " of these maps to use other keys.  One likely candidate is 'CTRL-_'
-  " (which also maps to CTRL-/, which is easier to type).  By default it is
-  " used to switch between Hebrew and English keyboard mode.
-  "
-  " All of the maps involving the <cfile> macro use '^<cfile>$': this is so
-  " that searches over '#include <time.h>" return only references to
-  " 'time.h', and not 'sys/time.h', etc. (by default cscope will return all
-  " files that contain 'time.h' as part of their name).
-
-
-  " To do the first type of search, hit 'CTRL-\', followed by one of the
-  " cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
-  " search will be displayed in the current window.  You can use CTRL-T to
-  " go back to where you were before the search.  
-  "
-
-  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-  nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
-
-
-  " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
-  " makes the vim window split horizontally, with search result displayed in
-  " the new window.
-  "
-  " (Note: earlier versions of vim may not have the :scs command, but it
-  " can be simulated roughly via:
-  "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
-
-  nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-  nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-  nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
-
-
-  " Hitting CTRL-space *twice* before the search type does a vertical 
-  " split instead of a horizontal one (vim 6 and up only)
-  "
-  " (Note: you may wish to put a 'set splitright' in your .vimrc
-  " if you prefer the new window on the right instead of the left
-
-  nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-  nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-  nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-
-
-  """"""""""""" key map timeouts
-  "
-  " By default Vim will only wait 1 second for each keystroke in a mapping.
-  " You may find that too short with the above typemaps.  If so, you should
-  " either turn off mapping timeouts via 'notimeout'.
-  "
-  "set notimeout 
-  "
-  " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
-  " with your own personal favorite value (in milliseconds):
-  "
-  "set timeoutlen=4000
-  "
-  " Either way, since mapping timeout settings by default also set the
-  " timeouts for multicharacter 'keys codes' (like <F1>), you should also
-  " set ttimeout and ttimeoutlen: otherwise, you will experience strange
-  " delays as vim waits for a keystroke after you hit ESC (it will be
-  " waiting to see if the ESC is actually part of a key code like <F1>).
-  "
-  "set ttimeout 
-  "
-  " personally, I find a tenth of a second to work well for key code
-  " timeouts. If you experience problems and have a slow terminal or network
-  " connection, set it higher.  If you don't set ttimeoutlen, the value for
-  " timeoutlent (default: 1000 = 1 second, which is sluggish) is used.
-  "
-  "set ttimeoutlen=100
-
-endif
 
 " load additional vim settings
 let DOTPATH = $HOME."/.dotfiles"
